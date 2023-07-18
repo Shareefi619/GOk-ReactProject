@@ -11,7 +11,7 @@ const Page: React.FC = () => {
     const fetchData = async () => {
       try {
         const response: AxiosResponse<{ results: CardProps[] }> =
-          await axios.get("https://randomuser.me/api/?results=50");
+          await axios.get("https://randomuser.me/api/?results=20");
         const filteredValues = response.data.results
           .filter((fit) => fit.id.value)
           .slice(0, 20);
@@ -39,13 +39,13 @@ const Page: React.FC = () => {
       </header>
 
       <main>
-        /** Loader: code */
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
           </div>
-          
-        ) : cards.length > 0 ? (
+        ) : null}
+
+        {!isLoading && cards.length ? (
           <div>
             {cards.map((card) => (
               <Card
